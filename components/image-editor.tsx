@@ -15,17 +15,81 @@ export function ImageEditor() {
   const [outputs, setOutputs] = useState<string[]>([])
   const [outputText, setOutputText] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [isPreparing, setIsPreparing] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const compressImage = (file: File) =>
+    new Promise<string>((resolve, reject) => {
+      const reader = new FileReader()
+
+      reader.onload = () => {
+        const img = new Image()
+
+        img.onload = () => {
+          const maxDimension = 1024
+          const scale = Math.min(1, maxDimension / Math.max(img.width, img.height))
+          const targetWidth = Math.round(img.width * scale)
+          const targetHeight = Math.round(img.height * scale)
+          const canvas = document.createElement("canvas")
+          const ctx = canvas.getContext("2d")
+
+          if (!ctx) {
+            reject(new Error("Unable to process the image."))
+            return
+          }
+
+          canvas.width = targetWidth
+          canvas.height = targetHeight
+          ctx.drawImage(img, 0, 0, targetWidth, targetHeight)
+
+          const dataUrl = canvas.toDataURL("image/jpeg", 0.85)
+          resolve(dataUrl)
+        }
+
+        img.onerror = () => reject(new Error("Failed to load the image."))
+        img.src = reader.result as string
+      }
+
+      reader.onerror = () => reject(new Error("Failed to read the image file."))
+      reader.readAsDataURL(file)
+    })
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
-      setError(null)
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setUploadedImage(reader.result as string)
+      if (!file.type.startsWith("image/")) {
+        setError("Please select a valid image file.")
+        return
       }
-      reader.readAsDataURL(file)
+
+      if (file.size > 10 * 1024 * 1024) {
+        setError("Please select an image smaller than 10MB.")
+        return
+      }
+
+      setError(null)
+      setIsPreparing(true)
+
+      try {
+        const compressedImage = await compressImage(file)
+        const base64 = compressedImage.split(",")[1] || ""
+        const bytes = Math.ceil((base64.length * 3) / 4)
+        const sizeInMb = bytes / (1024 * 1024)
+
+        if (sizeInMb > 3.5) {
+          setError("Image is still too large for server upload. Try a smaller image.")
+          setUploadedImage(null)
+          return
+        }
+
+        setUploadedImage(compressedImage)
+      } catch (err) {
+        const message = err instanceof Error ? err.message : "Image processing failed."
+        setError(message)
+        setUploadedImage(null)
+      } finally {
+        setIsPreparing(false)
+      }
     }
   }
 
@@ -56,7 +120,18 @@ export function ImageEditor() {
         }),
       })
 
-      const data = await response.json()
+      const contentType = response.headers.get("content-type") || ""
+      let data: { imageUrl?: string; text?: string; error?: string } | null = null
+
+      if (contentType.includes("application/json")) {
+        data = await response.json()
+      } else {
+        const text = await response.text()
+        if (!response.ok) {
+          throw new Error(text || "Generation failed.")
+        }
+        throw new Error("Unexpected response from the server.")
+      }
 
       if (!response.ok) {
         throw new Error(data?.error || "Generation failed.")
@@ -128,9 +203,10 @@ export function ImageEditor() {
                         variant="outline"
                         className="w-full"
                         onClick={() => fileInputRef.current?.click()}
+                        disabled={isPreparing}
                       >
                         <Upload className="mr-2 h-5 w-5" />
-                        Add Image
+                        {isPreparing ? "Processing..." : "Add Image"}
                       </Button>
                     </div>
                   </div>
