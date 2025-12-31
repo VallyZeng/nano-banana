@@ -8,8 +8,14 @@ import { createClient } from "@/lib/supabase/server"
 export async function signInWithGoogle() {
   const supabase = await createClient()
   const headersList = await headers()
-  const origin =
-    headersList.get("origin") ?? process.env.NEXT_PUBLIC_SITE_URL ?? ""
+  const envOrigin = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "")
+  const forwardedHost = headersList.get("x-forwarded-host")
+  const forwardedProto = headersList.get("x-forwarded-proto")
+  const host = forwardedHost ?? headersList.get("host")
+  const proto = forwardedProto ?? "https"
+  const inferredOrigin = host ? `${proto}://${host}` : ""
+  const headerOrigin = headersList.get("origin")
+  const origin = envOrigin || inferredOrigin || headerOrigin || ""
 
   if (!origin) {
     redirect("/auth/auth-code-error?error=missing-origin")
