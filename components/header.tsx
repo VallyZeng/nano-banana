@@ -24,24 +24,27 @@ export async function Header() {
 
         <nav className="hidden items-center gap-6 md:flex">
           <Link
-            href="#editor"
+            href="/#editor"
             className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
           >
             Editor
           </Link>
           <Link
-            href="#showcase"
+            href="/#showcase"
             className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
           >
             Examples
           </Link>
           <Link
-            href="#testimonials"
+            href="/#testimonials"
             className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
           >
             Reviews
           </Link>
-          <Link href="#faq" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
+          <Link href="/pricing" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
+            Pricing
+          </Link>
+          <Link href="/#faq" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
             FAQ
           </Link>
         </nav>
@@ -60,7 +63,7 @@ export async function Header() {
               asChild
               className="bg-primary text-primary-foreground hover:bg-primary/90"
             >
-              <Link href="#editor">Start Editing</Link>
+              <Link href="/#editor">Start Editing</Link>
             </Button>
           </div>
         ) : (
@@ -72,7 +75,7 @@ export async function Header() {
               asChild
               className="bg-primary text-primary-foreground hover:bg-primary/90"
             >
-              <Link href="#editor">Start Editing</Link>
+              <Link href="/#editor">Start Editing</Link>
             </Button>
           </div>
         )}

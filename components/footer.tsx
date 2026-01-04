@@ -19,17 +19,22 @@ export function Footer() {
             <h3 className="mb-4 font-semibold text-foreground">Product</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="#editor" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/#editor" className="text-muted-foreground hover:text-foreground transition-colors">
                   Editor
                 </Link>
               </li>
               <li>
-                <Link href="#showcase" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/#showcase" className="text-muted-foreground hover:text-foreground transition-colors">
                   Examples
                 </Link>
               </li>
               <li>
-                <Link href="#features" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/pricing" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Pricing
+                </Link>
+              </li>
+              <li>
+                <Link href="/#features" className="text-muted-foreground hover:text-foreground transition-colors">
                   Features
                 </Link>
               </li>
@@ -37,10 +42,10 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="mb-4 font-semibold text-foreground">Support</h3>
+            <h3 className="mb-4 font-semibold text-foreground">Support</h3>     
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="#faq" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/#faq" className="text-muted-foreground hover:text-foreground transition-colors">
                   FAQ
                 </Link>
               </li>
