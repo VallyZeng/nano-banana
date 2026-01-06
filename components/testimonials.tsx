@@ -40,7 +40,7 @@ export function Testimonials() {
             What Creators Are Saying
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Join thousands of satisfied creators transforming their images
+            See how creators are using Design Banana
           </p>
         </div>
 

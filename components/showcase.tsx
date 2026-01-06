@@ -36,7 +36,7 @@ export function Showcase() {
             Lightning-Fast AI Creations
           </Badge>
           <h2 className="mb-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
-            See What Nano Banana Creates
+            See What Design Banana Creates
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Experience the speed and quality of our AI technology in action
@@ -55,7 +55,7 @@ export function Showcase() {
                   alt={item.title}
                   className="aspect-video w-full object-cover"
                 />
-                <Badge className="absolute right-4 top-4 bg-primary text-primary-foreground">Nano Banana Speed</Badge>
+                <Badge className="absolute right-4 top-4 bg-primary text-primary-foreground">Design Banana Speed</Badge>
               </div>
               <CardContent className="p-6">
                 <h3 className="mb-2 text-xl font-semibold text-foreground">{item.title}</h3>
@@ -66,9 +66,9 @@ export function Showcase() {
         </div>
 
         <div className="mt-12 text-center">
-          <p className="mb-6 text-lg text-muted-foreground">Experience the power of Nano Banana yourself</p>
+          <p className="mb-6 text-lg text-muted-foreground">Experience the power of Design Banana yourself</p>
           <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-            <Link href="#editor">Try Nano Banana Generator</Link>
+            <Link href="#editor">Try Design Banana Generator</Link>
           </Button>
         </div>
       </div>

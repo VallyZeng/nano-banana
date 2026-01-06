@@ -99,7 +99,7 @@ export async function POST(request: Request) {
     process.env.OPENROUTER_SITE_URL ||
     request.headers.get("origin") ||
     "http://localhost:3000"
-  const siteTitle = process.env.OPENROUTER_SITE_TITLE || "NanoBanana AI"
+  const siteTitle = process.env.OPENROUTER_SITE_TITLE || "Design Banana AI"
 
   try {
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {

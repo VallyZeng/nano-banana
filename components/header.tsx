@@ -19,7 +19,7 @@ export async function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2 text-xl font-bold">
           <span className="text-3xl">🍌</span>
-          <span className="text-foreground">Nano Banana</span>
+          <span className="text-foreground">Design Banana</span>
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">

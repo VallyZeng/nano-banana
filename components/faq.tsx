@@ -2,7 +2,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 const faqs = [
   {
-    question: "What is Nano Banana?",
+    question: "What is Design Banana?",
     answer:
       "It's a revolutionary AI image editing model that transforms photos using natural language prompts. Currently one of the most powerful image editing models available, with exceptional consistency and superior performance for character editing and scene preservation.",
   },
@@ -12,9 +12,9 @@ const faqs = [
       'Simply upload an image and describe your desired edits in natural language. The AI understands complex instructions like "place the person in a snowy mountain" or "change the background to a sunset beach". It processes your text prompt and generates perfectly edited images.',
   },
   {
-    question: "What makes Nano Banana special?",
+    question: "What makes Design Banana special?",
     answer:
-      "Nano Banana excels in character consistency, scene blending, and one-shot editing. It preserves facial features and seamlessly integrates edits with backgrounds. It also supports multi-image context, making it ideal for creating consistent AI influencers.",
+      "Design Banana excels in character consistency, scene blending, and one-shot editing. It preserves facial features and seamlessly integrates edits with backgrounds. It also supports multi-image context, making it ideal for creating consistent AI influencers.",
   },
   {
     question: "Can I use it for commercial projects?",
@@ -29,7 +29,7 @@ const faqs = [
   {
     question: "How fast is the processing?",
     answer:
-      "Nano Banana is optimized for speed. Most edits are processed in less than a second, with complex scenes rendered in milliseconds. Experience real-time AI image editing without the wait.",
+      "Design Banana is optimized for speed. Most edits are processed in less than a second, with complex scenes rendered in milliseconds. Experience real-time AI image editing without the wait.",
   },
 ]
 
@@ -42,7 +42,7 @@ export function FAQ() {
             <h2 className="mb-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
               Frequently Asked Questions
             </h2>
-            <p className="text-lg text-muted-foreground">Everything you need to know about Nano Banana</p>
+            <p className="text-lg text-muted-foreground">Everything you need to know about Design Banana</p>
           </div>
 
           <Accordion type="single" collapsible className="space-y-4">

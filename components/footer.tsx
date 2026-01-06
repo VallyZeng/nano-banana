@@ -4,11 +4,11 @@ export function Footer() {
   return (
     <footer className="border-t border-border bg-muted/30 py-12">
       <div className="container mx-auto px-4">
-        <div className="grid gap-8 md:grid-cols-4">
+        <div className="grid gap-8 md:grid-cols-5">
           <div className="md:col-span-2">
             <Link href="/" className="mb-4 flex items-center gap-2 text-xl font-bold">
               <span className="text-3xl">🍌</span>
-              <span className="text-foreground">Nano Banana</span>
+              <span className="text-foreground">Design Banana</span>
             </Link>
             <p className="mb-4 text-sm text-muted-foreground max-w-sm">
               Transform any image with simple text prompts. Experience the future of AI image editing.
@@ -42,7 +42,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="mb-4 font-semibold text-foreground">Support</h3>     
+            <h3 className="mb-4 font-semibold text-foreground">Support</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/#faq" className="text-muted-foreground hover:text-foreground transition-colors">
@@ -50,13 +50,24 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Documentation
+                <a href="mailto:support@createdesign.online" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Contact Support
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="mb-4 font-semibold text-foreground">Legal</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Contact
+                <Link href="/terms" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Terms of Service
                 </Link>
               </li>
             </ul>
@@ -64,7 +75,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 border-t border-border pt-8 text-center text-sm text-muted-foreground">
-          <p>© 2025 Nano Banana. All rights reserved.</p>
+          <p>© 2026 Design Banana. All rights reserved.</p>
         </div>
       </div>
     </footer>

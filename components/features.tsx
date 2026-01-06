@@ -40,7 +40,7 @@ export function Features() {
       <div className="container mx-auto px-4">
         <div className="mb-16 text-center">
           <h2 className="mb-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
-            Why Choose Nano Banana?
+            Why Choose Design Banana?
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             The most advanced AI image editor. Revolutionize your photo editing with natural language understanding

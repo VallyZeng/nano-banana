@@ -8,7 +8,7 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Nano Banana - AI Image Editor | Transform Photos with Text",
+  title: "Design Banana - AI Image Editor | Transform Photos with Text",
   description:
     "Transform any image with simple text prompts. Advanced AI model for consistent character editing and scene preservation.",
   generator: "v0.app",
