@@ -49,7 +49,7 @@ const plans = [
   {
     key: "pro",
     name: "Pro",
-    description: "For creators who edit daily and need speed.",
+    description: "For creators who edit daily.",
     monthlyPrice: 21,
     yearlyPrice: 249,
     creditsPerMonth: 150,

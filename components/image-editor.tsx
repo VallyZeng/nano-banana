@@ -263,7 +263,7 @@ export function ImageEditor() {
                   ) : (
                     <div className="flex min-h-96 items-center justify-center rounded-lg border-2 border-dashed border-border bg-muted/30 p-12">
                       <div className="text-center">
-                        <div className="mb-4 text-2xl font-semibold text-foreground">Ready for instant generation</div>
+                        <div className="mb-4 text-2xl font-semibold text-foreground">Ready to create</div>
                         <p className="mt-2 text-sm text-muted-foreground">
                           Upload an image and enter your prompt to see the magic
                         </p>

@@ -33,11 +33,6 @@ export function Footer() {
                   Pricing
                 </Link>
               </li>
-              <li>
-                <Link href="/#features" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Features
-                </Link>
-              </li>
             </ul>
           </div>
 

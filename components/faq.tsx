@@ -27,9 +27,9 @@ const faqs = [
       "The editor handles complex edits including face completion, background changes, object placement, style transfers, and character modifications. It excels at understanding contextual instructions while maintaining photorealistic quality.",
   },
   {
-    question: "How fast is the processing?",
+    question: "How does the processing work?",
     answer:
-      "Design Banana is optimized for speed. Most edits are processed in less than a second, with complex scenes rendered in milliseconds. Experience real-time AI image editing without the wait.",
+      "Design Banana uses advanced AI to understand your text prompts and generate precise edits. The model maintains character consistency and seamlessly blends changes with your original image, delivering professional-quality results.",
   },
 ]
 

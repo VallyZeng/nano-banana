@@ -35,12 +35,6 @@ export async function Header() {
           >
             Examples
           </Link>
-          <Link
-            href="/#testimonials"
-            className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
-          >
-            Reviews
-          </Link>
           <Link href="/pricing" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
             Pricing
           </Link>
