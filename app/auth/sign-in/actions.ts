@@ -7,8 +7,8 @@ import { createClient } from "@/lib/supabase/server"
 export async function signInWithGoogle() {
   const supabase = await createClient()
 
-  // 在服务器端 action 中，必须使用 NEXT_PUBLIC_SITE_URL 环境变量
-  // 因为请求头中的 host 可能是 localhost (内部服务器地址)
+  // In server actions, we must use the NEXT_PUBLIC_SITE_URL environment variable
+  // because the host header may be localhost (internal server address)
   const origin = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "")
 
   if (!origin) {

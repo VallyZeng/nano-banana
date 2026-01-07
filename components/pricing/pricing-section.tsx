@@ -76,7 +76,7 @@ function PlanCta({
   if (!productId) {
     return (
       <Button className="w-full" variant="outline" disabled>
-        未配置 Creem 产品 ID ({interval})
+        Creem product ID not configured ({interval})
       </Button>
     )
   }
@@ -170,7 +170,8 @@ export function PricingSection({
 
           {!user ? (
             <p className="mt-4 text-sm text-muted-foreground">
-              提示：建议先登录再购买，这样我们可以用你的账号自动开通权限。            </p>
+              Tip: Log in before purchasing so we can automatically grant access to your account.
+            </p>
           ) : null}
         </div>
 
