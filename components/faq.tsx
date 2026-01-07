@@ -31,6 +31,11 @@ const faqs = [
     answer:
       "Design Banana uses advanced AI to understand your text prompts and generate precise edits. The model maintains character consistency and seamlessly blends changes with your original image, delivering professional-quality results.",
   },
+  {
+    question: "Is Design Banana affiliated with Google or Gemini?",
+    answer:
+      "No. Design Banana is an independent platform and is not affiliated with, endorsed by, or sponsored by Google. We provide access to advanced AI models through our custom interface to enhance usability and provide additional features.",
+  },
 ]
 
 export function FAQ() {

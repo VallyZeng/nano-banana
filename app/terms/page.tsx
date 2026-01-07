@@ -60,7 +60,7 @@ export default function TermsPage() {
                 <li>Subscriptions automatically renew unless canceled</li>
                 <li>You can cancel anytime from the billing portal</li>
                 <li>Cancellations take effect at the end of the current billing period</li>
-                <li>Refunds are handled on a case-by-case basis</li>
+                <li>All sales are final and no refunds are offered</li>
               </ul>
             </section>
 
@@ -172,7 +172,19 @@ export default function TermsPage() {
 
             <section className="space-y-4">
               <h2 className="text-2xl font-semibold text-foreground">
-                15. Contact Information
+                15. AI Product Disclosure
+              </h2>
+              <p>
+                Design Banana is an independent platform that provides a user-friendly interface built on top of third-party AI models. We are an independent service and not affiliated with, endorsed by, or sponsored by any AI model providers, including but not limited to Google, Gemini, or any other AI service providers.
+              </p>
+              <p>
+                Any references to AI models or services are solely for the purpose of describing the technology that powers our platform. All trademarks, service marks, and company names mentioned are the property of their respective owners.
+              </p>
+            </section>
+
+            <section className="space-y-4">
+              <h2 className="text-2xl font-semibold text-foreground">
+                16. Contact Information
               </h2>
               <p>
                 For questions about these Terms of Service, please contact us at:

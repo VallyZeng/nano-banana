@@ -120,7 +120,19 @@ export default function PrivacyPage() {
 
             <section className="space-y-4">
               <h2 className="text-2xl font-semibold text-foreground">
-                10. Contact Us
+                10. Third-Party AI Services
+              </h2>
+              <p>
+                Design Banana is an independent platform and is not affiliated with, endorsed by, or sponsored by any third-party AI service providers. We use third-party AI models to power our image editing features, and your data may be processed by these third-party services in accordance with their respective privacy policies.
+              </p>
+              <p>
+                By using Design Banana, you acknowledge that your image data and text prompts may be transmitted to and processed by third-party AI services. We encourage you to review the privacy policies of these third-party providers.
+              </p>
+            </section>
+
+            <section className="space-y-4">
+              <h2 className="text-2xl font-semibold text-foreground">
+                11. Contact Us
               </h2>
               <p>
                 If you have any questions about this Privacy Policy, please contact us at:
