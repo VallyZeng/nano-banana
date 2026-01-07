@@ -1,24 +1,18 @@
 "use server"
 
-import { headers } from "next/headers"
 import { redirect } from "next/navigation"
 
 import { createClient } from "@/lib/supabase/server"
 
 export async function signInWithGoogle() {
   const supabase = await createClient()
-  const headersList = await headers()
-  const envOrigin = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "")
-  const forwardedHost = headersList.get("x-forwarded-host")
-  const forwardedProto = headersList.get("x-forwarded-proto")
-  const host = forwardedHost ?? headersList.get("host")
-  const proto = forwardedProto ?? "https"
-  const inferredOrigin = host ? `${proto}://${host}` : ""
-  const headerOrigin = headersList.get("origin")
-  const origin = envOrigin || inferredOrigin || headerOrigin || ""
+
+  // 在服务器端 action 中，必须使用 NEXT_PUBLIC_SITE_URL 环境变量
+  // 因为请求头中的 host 可能是 localhost (内部服务器地址)
+  const origin = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "")
 
   if (!origin) {
-    redirect("/auth/auth-code-error?error=missing-origin")
+    redirect("/auth/auth-code-error?error=missing-env-url")
   }
 
   const { data, error } = await supabase.auth.signInWithOAuth({
