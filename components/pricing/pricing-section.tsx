@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useMemo, useState } from "react"
 import { CreemCheckout } from "@creem_io/nextjs"
@@ -8,6 +8,13 @@ import { Badge } from "@/components/ui/badge"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import {
+  planDefinitions,
+  pricingProductIds,
+  type BillingInterval,
+  type PlanKey,
+} from "@/lib/pricing-config"
+import type { PricingProducts } from "@/lib/pricing-types"
 import { cn } from "@/lib/utils"
 
 type PricingUser =
@@ -18,64 +25,40 @@ type PricingUser =
     }
   | null
 
-type BillingInterval = "monthly" | "yearly"
+function formatPrice(priceInCents: number | null, currency: string | null) {
+  if (priceInCents == null) {
+    return "--"
+  }
 
-const productIds = {
-  lite: {
-    monthly: process.env.NEXT_PUBLIC_CREEM_PRODUCT_ID_LITE_MONTHLY,
-    yearly: process.env.NEXT_PUBLIC_CREEM_PRODUCT_ID_LITE_YEARLY,
-  },
-  pro: {
-    monthly: process.env.NEXT_PUBLIC_CREEM_PRODUCT_ID_PRO_MONTHLY,
-    yearly: process.env.NEXT_PUBLIC_CREEM_PRODUCT_ID_PRO_YEARLY,
-  },
-  enterprise: {
-    monthly: process.env.NEXT_PUBLIC_CREEM_PRODUCT_ID_ENTERPRISE_MONTHLY,
-    yearly: process.env.NEXT_PUBLIC_CREEM_PRODUCT_ID_ENTERPRISE_YEARLY,
-  },
-} as const
-
-const plans = [
-  {
-    key: "lite",
-    name: "Lite",
-    description: "For getting started with regular edits.",
-    monthlyPrice: 7,
-    yearlyPrice: 89,
-    creditsPerMonth: 40,
-    imagesPerMonth: 80,
-    features: ["Commercial license", "Unlimited storage"],
-  },
-  {
-    key: "pro",
-    name: "Pro",
-    description: "For creators who edit daily.",
-    monthlyPrice: 21,
-    yearlyPrice: 249,
-    creditsPerMonth: 150,
-    imagesPerMonth: 300,
-    features: [
-      "Everything in Lite",
-      "Priority generation",
-      "Dedicated support",
-    ],
-    featured: true,
-  },
-  {
-    key: "enterprise",
-    name: "Enterprise",
-    description: "For teams, agencies, and high-volume workflows.",
-    monthlyPrice: 56,
-    yearlyPrice: 669,
-    creditsPerMonth: 400,
-    imagesPerMonth: 800,
-    features: ["Everything in Pro", "API access", "Custom integrations"],
-  },
-] as const
-
-function formatPrice(price: number) {
-  return `$${price}`
+  const resolvedCurrency = currency || "USD"
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: resolvedCurrency,
+  }).format(priceInCents / 100)
 }
+function getBillingSuffix(
+  billingPeriod: string | null | undefined,
+  interval: BillingInterval,
+) {
+  if (billingPeriod) {
+    const normalized = billingPeriod.toLowerCase()
+    if (normalized.includes("month")) {
+      return "/mo"
+    }
+    if (normalized.includes("year")) {
+      return "/yr"
+    }
+    if (normalized.includes("week")) {
+      return "/wk"
+    }
+    if (normalized.includes("day")) {
+      return "/day"
+    }
+  }
+
+  return interval === "monthly" ? "/mo" : "/yr"
+}
+
 
 function PlanCta({
   planKey,
@@ -83,17 +66,17 @@ function PlanCta({
   user,
   featured,
 }: {
-  planKey: (typeof plans)[number]["key"]
+  planKey: PlanKey
   interval: BillingInterval
   user: PricingUser
   featured?: boolean
 }) {
-  const productId = productIds[planKey]?.[interval]
+  const productId = pricingProductIds[planKey]?.[interval]
 
   if (!productId) {
     return (
       <Button className="w-full" variant="outline" disabled>
-        未配置 Creem 产品 ID（{interval}）
+        未配置 Creem 产品 ID ({interval})
       </Button>
     )
   }
@@ -133,20 +116,33 @@ function PlanCta({
   )
 }
 
-export function PricingSection({ user }: { user: PricingUser }) {
+export function PricingSection({
+  user,
+  products,
+}: {
+  user: PricingUser
+  products: PricingProducts
+}) {
   const [interval, setInterval] = useState<BillingInterval>("monthly")
 
   const plansWithPrices = useMemo(() => {
-    return plans.map((plan) => {
-      const price = interval === "monthly" ? plan.monthlyPrice : plan.yearlyPrice
-      const suffix = interval === "monthly" ? "/mo" : "/yr"
+    return planDefinitions.map((plan) => {
+      const product = products?.[plan.key]?.[interval] ?? null
+      const description =
+        product?.description?.trim() || plan.fallbackDescription
+      const suffix = getBillingSuffix(product?.billingPeriod, interval)
+      const features =
+        product?.features.length ? product.features : plan.features
       return {
         ...plan,
-        price,
+        description,
+        price: product?.price ?? null,
+        currency: product?.currency ?? null,
         suffix,
+        features,
       }
     })
-  }, [interval])
+  }, [interval, products])
 
   return (
     <section className="py-20 md:py-32">
@@ -174,12 +170,11 @@ export function PricingSection({ user }: { user: PricingUser }) {
 
           {!user ? (
             <p className="mt-4 text-sm text-muted-foreground">
-              提示：建议先登录再购买，这样我们可以用你的账号自动开通权益。
-            </p>
+              提示：建议先登录再购买，这样我们可以用你的账号自动开通权限。            </p>
           ) : null}
         </div>
 
-        <div className="mx-auto mt-12 grid max-w-6xl gap-8 md:grid-cols-3">
+        <div className="mx-auto mt-12 grid max-w-5xl gap-8 md:grid-cols-2">
           {plansWithPrices.map((plan) => (
             <Card
               key={plan.key}
@@ -200,7 +195,7 @@ export function PricingSection({ user }: { user: PricingUser }) {
                 <p className="text-sm text-muted-foreground">{plan.description}</p>
                 <div className="flex items-baseline gap-2">
                   <div className="text-4xl font-bold text-foreground">
-                    {formatPrice(plan.price)}
+                    {formatPrice(plan.price, plan.currency)}
                   </div>
                   <div className="text-sm text-muted-foreground">{plan.suffix}</div>
                 </div>
@@ -219,8 +214,11 @@ export function PricingSection({ user }: { user: PricingUser }) {
                     <Check className="mt-0.5 h-4 w-4 text-primary" />
                     <span>Up to {plan.imagesPerMonth} generations / month</span>
                   </li>
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-2">
+                  {plan.features.map((feature, index) => (
+                    <li
+                      key={`${feature}-${index}`}
+                      className="flex items-start gap-2"
+                    >
                       <Check className="mt-0.5 h-4 w-4 text-primary" />
                       <span>{feature}</span>
                     </li>
@@ -243,3 +241,6 @@ export function PricingSection({ user }: { user: PricingUser }) {
     </section>
   )
 }
+
+
+

@@ -3,6 +3,7 @@ import { Footer } from "@/components/footer"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { PricingSection } from "@/components/pricing/pricing-section"
 import { createClient } from "@/lib/supabase/server"
+import { getPricingProducts } from "@/lib/creem"
 
 const pricingFaqs = [
   {
@@ -18,17 +19,17 @@ const pricingFaqs = [
   {
     question: "Do you offer refunds?",
     answer:
-      "If you run into a billing issue, contact support and we’ll help. For completed purchases, refund eligibility depends on the payment outcome and usage.",
+      "If you run into a billing issue, contact support and we'll help. For completed purchases, refund eligibility depends on the payment outcome and usage.",
   },
   {
     question: "Do I need to log in before purchasing?",
     answer:
-      "It’s recommended. When you purchase while logged in, we can attach the purchase to your account and unlock features automatically.",
+      "It's recommended. When you purchase while logged in, we can attach the purchase to your account and unlock features automatically.",
   },
   {
-    question: "Do you have an API plan?",
+    question: "Can I change plans later?",
     answer:
-      "Yes — the Enterprise plan is designed for API and custom integrations. If you need higher limits, reach out for a custom quote.",
+      "Yes. You can upgrade or downgrade your plan anytime from the billing portal. When upgrading, you'll get immediate access to higher limits.",
   },
 ] as const
 
@@ -36,6 +37,7 @@ export default async function PricingPage() {
   const supabase = await createClient()
   const { data } = await supabase.auth.getUser()
   const user = data.user
+  const pricingProducts = await getPricingProducts()
 
   const pricingUser = user
     ? {
@@ -52,7 +54,7 @@ export default async function PricingPage() {
     <div className="min-h-screen">
       <Header />
       <main>
-        <PricingSection user={pricingUser} />
+        <PricingSection user={pricingUser} products={pricingProducts} />
 
         <section className="py-20 md:py-32 bg-muted/30">
           <div className="container mx-auto px-4">
@@ -71,7 +73,7 @@ export default async function PricingPage() {
                   <AccordionItem
                     key={faq.question}
                     value={faq.question}
-                    className="rounded-lg border-2 bg-card px-6"
+                    className="rounded-lg border-2 border-b-2 last:border-b-2 bg-card px-6 py-2"
                   >
                     <AccordionTrigger className="text-left text-base font-semibold hover:no-underline">
                       {faq.question}
@@ -90,4 +92,3 @@ export default async function PricingPage() {
     </div>
   )
 }
-
