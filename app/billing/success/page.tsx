@@ -15,8 +15,7 @@ export default function BillingSuccessPage() {
               Payment successful
             </h1>
             <p className="mb-8 text-muted-foreground">
-              Thanks for your purchase. If you were logged in during checkout, your
-              access should be enabled shortly.
+              Thanks for your purchase! Your plan is now active and you have full access to all features.
             </p>
             <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Button asChild>

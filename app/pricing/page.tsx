@@ -24,7 +24,7 @@ const pricingFaqs = [
   {
     question: "Do I need to log in before purchasing?",
     answer:
-      "It's recommended. When you purchase while logged in, we can attach the purchase to your account and unlock features automatically.",
+      "Yes. You must be signed in to purchase. We'll automatically activate your plan and grant access to your account immediately after payment.",
   },
   {
     question: "Can I change plans later?",

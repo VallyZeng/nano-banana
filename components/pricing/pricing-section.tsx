@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react"
 import { CreemCheckout } from "@creem_io/nextjs"
 import { Check } from "lucide-react"
+import Link from "next/link"
 
 import { Badge } from "@/components/ui/badge"
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -78,6 +79,25 @@ function PlanCta({
       <Button className="w-full" variant="outline" disabled>
         Creem product ID not configured ({interval})
       </Button>
+    )
+  }
+
+  // If user is not logged in, show a sign-in button
+  if (!user) {
+    return (
+      <Link
+        href="/auth/sign-in"
+        className={cn(
+          buttonVariants({
+            variant: featured ? "default" : "outline",
+            size: "lg",
+          }),
+          "w-full justify-center inline-flex",
+          featured ? "" : "bg-background",
+        )}
+      >
+        Sign in to purchase
+      </Link>
     )
   }
 
@@ -170,7 +190,7 @@ export function PricingSection({
 
           {!user ? (
             <p className="mt-4 text-sm text-muted-foreground">
-              Tip: Log in before purchasing so we can automatically grant access to your account.
+              Sign in required to purchase. We'll automatically activate your plan after payment.
             </p>
           ) : null}
         </div>
