@@ -1,5 +1,6 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import Link from "next/link"
 
 export default function TermsPage() {
   return (
@@ -187,10 +188,11 @@ export default function TermsPage() {
                 16. Contact Information
               </h2>
               <p>
-                For questions about these Terms of Service, please contact us at:
-              </p>
-              <p className="font-medium text-foreground">
-                Email: support@createdesign.online
+                For questions about these Terms of Service, please{" "}
+                <Link href="/contact" className="text-primary hover:underline">
+                  contact us
+                </Link>
+                .
               </p>
             </section>
           </div>

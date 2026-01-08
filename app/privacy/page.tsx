@@ -1,5 +1,6 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import Link from "next/link"
 
 export default function PrivacyPage() {
   return (
@@ -135,10 +136,11 @@ export default function PrivacyPage() {
                 11. Contact Us
               </h2>
               <p>
-                If you have any questions about this Privacy Policy, please contact us at:
-              </p>
-              <p className="font-medium text-foreground">
-                Email: support@createdesign.online
+                If you have any questions about this Privacy Policy, please{" "}
+                <Link href="/contact" className="text-primary hover:underline">
+                  contact us
+                </Link>
+                .
               </p>
             </section>
           </div>
