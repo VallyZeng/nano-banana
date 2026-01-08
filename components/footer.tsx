@@ -45,9 +45,9 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="mailto:support@createdesign.online" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">
                   Contact Support
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
