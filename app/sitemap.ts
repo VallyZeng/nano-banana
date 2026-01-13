@@ -16,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${siteUrl}/pricing`,
       lastModified: now,
       changeFrequency: "monthly",
-      priority: 0.7,
+      priority: 0.8,
     },
     {
       url: `${siteUrl}/contact`,
@@ -28,13 +28,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${siteUrl}/privacy`,
       lastModified: now,
       changeFrequency: "yearly",
-      priority: 0.4,
+      priority: 0.3,
     },
     {
       url: `${siteUrl}/terms`,
       lastModified: now,
       changeFrequency: "yearly",
-      priority: 0.4,
+      priority: 0.3,
     },
   ]
 }

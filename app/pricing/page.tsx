@@ -1,9 +1,15 @@
+import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { PricingSection } from "@/components/pricing/pricing-section"
 import { createClient } from "@/lib/supabase/server"
 import { getPricingProducts } from "@/lib/creem"
+
+export const metadata: Metadata = {
+  title: "Pricing",
+  description: "Affordable pricing plans for AI image editing. Choose from monthly credits or flexible pay-as-you-go options.",
+}
 
 const pricingFaqs = [
   {

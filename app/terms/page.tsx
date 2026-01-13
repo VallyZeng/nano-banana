@@ -1,6 +1,12 @@
+import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+  title: "Terms of Service",
+  description: "Read our Terms of Service to understand your rights and responsibilities when using Design Banana's AI image editing platform.",
+}
 
 export default function TermsPage() {
   return (

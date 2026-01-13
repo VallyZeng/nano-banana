@@ -1,6 +1,12 @@
+import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description: "Learn how Design Banana collects, uses, and protects your data. Our commitment to your privacy.",
+}
 
 export default function PrivacyPage() {
   return (

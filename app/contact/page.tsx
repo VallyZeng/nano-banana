@@ -1,6 +1,12 @@
+import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ContactForm } from "./contact-form"
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description: "Get in touch with the Design Banana team. We'd love to hear your feedback, questions, or suggestions.",
+}
 
 export default function ContactPage() {
   return (
